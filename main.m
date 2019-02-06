@@ -10,8 +10,10 @@ clc;
 path = fullfile('Images', 'test1.png'); % 3,5
 testImage = imread(path);
 testImage = im2double(testImage);
+numberOfColors = 100; 
+numberOfL = 3;
 % Call function
-output = TNM097(testImage)
+output = TNM097(testImage,numberOfColors,numberOfL);
 
 %% Show image
 figure();
