@@ -3,7 +3,8 @@ function [ image ] = TNM097( im ,numberOfColors,numberOfL)
 % insert code that calls functions here
 
 % Add grid to image
-imGrid = addGrid(im);
+ppr = 4;
+[imGrid, ColDist, RowDist] = addGrid(im, ppr);
 
 ppi = 200;
 pearlSize = 40;
