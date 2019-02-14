@@ -20,8 +20,14 @@ for i = 1:length(pearlSingleArray)
     pearlSingleLab(1,i,:) = rgb2lab(pearlSingleArray(1,i,:));
 end
 
+testColor = [0, 0, 0];
+
+colorIndex = compareLab(pearlSingleLab, testColor);
+
+colorIndex
+
 % Mean colors of grid squares
-[meanGrid] = meanColorInGrid(im,ColDist,RowDist)
+%[meanGrid] = meanColorInGrid(im,ColDist,RowDist)
 
 %imshow(pearlPlate)
 
