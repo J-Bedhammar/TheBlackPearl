@@ -1,0 +1,21 @@
+function index = compareLab(arrayLab,colorRGB)
+% Author: Oliver Johansson
+% Compares the picked color to the colorarray and picks the one that looks like the picked color the most.
+
+colorLab = rgb2lab(colorRGB);
+
+c_L = colorLab(:,1);
+c_A = colorLab(:,2);
+c_B = colorLab(:,3);
+
+for i = 1:length(arrayLab)
+    a_L = arrayLab(i,1);
+    a_A = arrayLab(i,2);
+    a_B = arrayLab(i,3);
+    
+    E_ab = sqrt((c_L)
+    
+end
+
+end
+
