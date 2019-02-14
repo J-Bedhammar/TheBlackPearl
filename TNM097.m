@@ -6,6 +6,4 @@ pearlSize = 40;
 RGBRange = [4,5,5];
 [pearlColors,pearlSingleArray] = pearlColors(pearlSize,RGBRange);
 
-
-
-image= im;
+image = addGrid(im)
