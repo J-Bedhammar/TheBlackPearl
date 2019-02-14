@@ -1,6 +1,10 @@
 function [ image ] = TNM097( im ,numberOfColors,numberOfL)
 % TNM097
 % insert code that calls functions here
+
+% Add grid to image
+imGrid = addGrid(im);
+
 ppi = 200;
 pearlSize = 40;
 
@@ -10,6 +14,9 @@ RGBRange = colorSteps(1);
 
 %imshow(pearlPlate)
 
-image= im;
+
+image = imGrid;
 
 end
+
+
