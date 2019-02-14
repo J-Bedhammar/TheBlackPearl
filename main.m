@@ -19,3 +19,6 @@ output = TNM097(testImage,numberOfColors,numberOfL);
 figure();
 imshow(testImage);
 
+figure();
+imshow(output);
+
