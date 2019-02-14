@@ -16,11 +16,10 @@ numberOfL = 3;
 output = TNM097(testImage,numberOfColors,numberOfL);
 
 %% Show image
-subplot(1,2,1)
+subplot()
+figure();
 imshow(testImage);
-title('Original')
 
-subplot(1,2,2)
+figure();
 imshow(output);
-title('TNM097 Output')
 
