@@ -14,7 +14,7 @@ RGBRange = colorSteps(1);
 [pearlPlate,pearlSingleArray] = pearlColors(pearlSize,RGBRange);
 
 %imshow(pearlPlate)
-
+[meanGrid] = meanColorInGrid(im,ColDist,RowDist)
 
 image = imGrid;
 
