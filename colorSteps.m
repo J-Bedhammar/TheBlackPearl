@@ -1,11 +1,14 @@
 function [ RGBRange ] = colorSteps(numberOfColors)
 %NUMCOLORS Summary of this function goes here
-% User chooses alternative 1-9, which decides number of pearl colors,
-% ranging from 100 to 4 colors
+% User enters a number between 1-9 which decides the number of colors(pearls),
+% Pearl color ranges between 4 and 100. 
+
+% Default case
 R = 4;
 G = 5;
 B = 5;
 
+% Change RGB color steps
 switch numberOfColors
     case 1      % 100
         R = 5;
@@ -45,6 +48,7 @@ switch numberOfColors
         B = 2;
 end
 
+% Output
 RGBRange = [R, G, B];
 
 
