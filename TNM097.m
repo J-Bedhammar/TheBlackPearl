@@ -3,8 +3,8 @@ function [ image ] = TNM097( im ,numberOfColors,numberOfL)
 % insert code that calls functions here
 
 % Add grid to image
-ppr = 8;
-[imGrid, ColDist, RowDist] = addGrid(im, ppr);
+PearlsPerRow = 4;
+[imGrid, ColDist, RowDist] = addGrid(im, PearlsPerRow);
 
 ppi = 200;
 pearlSize = 40;
@@ -20,11 +20,13 @@ for i = 1:length(pearlSingleArray)
     pearlSingleLab(1,i,:) = rgb2lab(pearlSingleArray(1,i,:));
 end
 
-
+% Mean colors of grid squares
+[meanGrid] = meanColorInGrid(im,ColDist,RowDist)
 
 %imshow(pearlPlate)
 
 image = imGrid;
+
 
 end
 
