@@ -1,8 +1,9 @@
 %% TNM034 OMR Project
 % Authors: Jennifer Bedhammar, Julius Kördel, Oliver Johansson.
-% Last edit: 2019-02-06
+% Last edit: 2019-02-14
+
 %% Clear all, clc
-clear all;
+clear variables;
 close all;
 clc;
 
@@ -12,6 +13,7 @@ testImage = imread(path);
 testImage = im2double(testImage);
 numberOfColors = 100; 
 numberOfL = 3;
+
 % Call function
 output = TNM097(testImage,numberOfColors,numberOfL);
 
