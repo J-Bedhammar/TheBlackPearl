@@ -14,22 +14,12 @@ pearlSize = 40;
 RGBRange = colorSteps(1);
 [pearlPlate,pearlSingleArray] = pearlColors(pearlSize,RGBRange);
 
-% Change pearls from RGB to L*a*b for color matching
-pearlSingleLab = zeros(size(pearlSingleArray));
-for i = 1:length(pearlSingleArray)
-    pearlSingleLab(1,i,:) = rgb2lab(pearlSingleArray(1,i,:));
-end
-
-testColor = [0, 0, 0];
-
-colorIndex = compareLab(pearlSingleLab, testColor);
-
-colorIndex
-
 % Mean colors of grid squares
-%[meanGrid] = meanColorInGrid(im,ColDist,RowDist)
+[meanGrid] = meanColorInGrid(im,ColDist,RowDist);
 
-%imshow(pearlPlate)
+indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
+
+imshow(meanGrid)
 
 image = imGrid;
 
