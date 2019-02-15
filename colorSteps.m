@@ -4,16 +4,16 @@ function [ RGBRange ] = colorSteps(numberOfColors)
 % Pearl color ranges between 4 and 100. 
 
 % Default case
-R = 4;
+R = 5;
 G = 5;
-B = 5;
+B = 4;
 
 % Change RGB color steps
 switch numberOfColors
     case 1      % 100
         R = 5;
-        G = 4;
-        B = 5;
+        G = 5;
+        B = 4;
     case 2      % 80
         R = 4;
         G = 5;
