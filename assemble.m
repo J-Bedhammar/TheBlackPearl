@@ -23,10 +23,10 @@ for r = 1:RowDist:x
     end
     % indexing and access stuff
     % and reset y for each row
-    countery = 1; 
+    countery = 1;
     lastCol = 1;
+    lastRow = (RowDist*counterx) +1;
     counterx = counterx+1;
-    lastRow = RowDist*counterx;
 end
 
 

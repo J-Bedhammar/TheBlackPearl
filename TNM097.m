@@ -19,6 +19,7 @@ RGBRange = colorSteps(1);
 
 indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
 
+[pearlifiedIm] = assemble(indexPearlGrid,ColDist,RowDist,size(im),pearlSingleArray)
 imshow(meanGrid)
 
 image = imGrid;
