@@ -24,8 +24,6 @@ testColor = [0, 0, 0];
 
 colorIndex = compareLab(pearlSingleLab, testColor);
 
-colorIndex
-
 % Mean colors of grid squares
 %[meanGrid] = meanColorInGrid(im,ColDist,RowDist)
 
@@ -33,7 +31,4 @@ colorIndex
 
 image = imGrid;
 
-
 end
-
-
