@@ -5,12 +5,10 @@ function [pearlifiedIm] = assemble(indexMatrix,ColDist,RowDist,imSize,pearlSingl
 x = imSize(1);
 y = imSize(2);
 pearlifiedIm = zeros(x,y,3);
-
 counterx = 1;
 countery = 1; 
 lastRow = 1;
 lastCol = 1;
-
 for r = 1:RowDist:x
     for c = 1 :ColDist:y
            pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,1) = pearlSingleArray(1,indexMatrix(counterx,countery),1);
