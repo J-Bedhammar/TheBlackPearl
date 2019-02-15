@@ -23,7 +23,4 @@ imshow(meanGrid)
 
 image = imGrid;
 
-
 end
-
-
