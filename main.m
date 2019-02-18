@@ -8,7 +8,7 @@ close all;
 clc;
 
 % Load testimage
-path = fullfile('Images', 'test1.png'); % 3,5
+path = fullfile('Images', 'rainbow-kittens.jpg'); % 3,5
 testImage = imread(path);
 testImage = im2double(testImage);
 numberOfColors = 100; 
