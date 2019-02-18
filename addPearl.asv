@@ -1,0 +1,29 @@
+function [outputArg1,outputArg2] = addPearl(Img, Center, colDist)
+
+[sr,sc] = size(img);
+[columnsInImage rowsInImage] = meshgrid(1:sc, 1:sr);
+
+% Next create the circle in the image.
+radius = 100;
+s = abs(centerX - (centerX + radius));
+t = abs(centerY - (centerY + 0));
+radius = sqrt(s^2 + t^2);
+circle = ((rowsInImage - centerY)/radius).^2 + ((columnsInImage - centerX)/radius).^2 ;%<= radius.^2;
+
+threshold = circle(centerY + s, centerX + t);
+
+circlePixels = circle <= threshold;
+
+R = img;
+G = img;
+B = img;
+
+R(circlePixels) = 255;
+G(circlePixels) = 0;
+B(circlePixels) = 0;
+rgb = cat(3, R, G, B);
+
+image(rgb);
+
+end
+
