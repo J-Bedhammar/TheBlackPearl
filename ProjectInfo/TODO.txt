@@ -20,7 +20,7 @@ Betyg 3:
 	
 	- Gör en annan typ av optimering beroende av originalbilden. Minska antalet pärlor 
 	(ex från 100 till 50) för en viss bild. Gör optimeringen för minst två originalbilder
-	och jämför med tidigare resultat.
+	och jämför med tidigare resultat. [DITHERING]
 
 Betyg 4:
 	- Använd S-CIELab kvalitetsmått (lab 3) för att bedöma reproduktionskvaliteten.

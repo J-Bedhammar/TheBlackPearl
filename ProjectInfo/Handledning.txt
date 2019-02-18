@@ -1,0 +1,15 @@
+Frågor:
+
+1. [Visa pärlor] Finns det något bättre sätt att göra det på? Is this enough? 
+
+2. När man ska halvera antalet pärlor: Ska det baseras på något speciellt mått?
+   Är det vi har tillräckligt? Svårt att stega i Lab.
+
+3. Hur kan man optimera beroende på porträtt och mörk bild o.s.v?
+
+4. Måste man ha 100 färger eller kan man lägga till några extra grå färger?
+
+5. Är det ok använda dithering att plocka ut färger?
+
+6. Optimering av färger, finns det något bättre sätt?
+
