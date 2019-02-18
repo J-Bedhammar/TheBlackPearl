@@ -1,0 +1,30 @@
+TO DO:
+
+OBS! Koden oberoende av inmatad bild, stor/liten.
+Om utbilden är förstorad (för litet original), tala om det.
+
+Betyg 3:
+	- Väl fungerande kod, Originalbild (vilken som helst). 
+	Välj lämplig pärla, baserad på färgskillnaden i CIELAB:
+
+	- Använd en strategi(optimering) för att välja 100 pärlor (färgerna)
+	på ett optimalt sätt så att de bäst täcker hela färgrymden.
+	
+	- Av de 100 pärlorna, ta bort de som ligger närmast varandra i färgrymden.
+	Använd optimering för att minska antalet pärlor. Ex: Halvera genom att välja
+	de 50 som bäst täcker hela färgrymden.
+
+	- Använd minst ett objektivt kvalitetsmått för at utvärdera resultaten i stegen ovan.
+	Jämförelsen ska göras för minst 3 originalbilder av olika karaktär.
+	(Porträtt, mörk bild, landskap, ljus bild etc)
+	
+	- Gör en annan typ av optimering beroende av originalbilden. Minska antalet pärlor 
+	(ex från 100 till 50) för en viss bild. Gör optimeringen för minst två originalbilder
+	och jämför med tidigare resultat.
+
+Betyg 4:
+	- Använd S-CIELab kvalitetsmått (lab 3) för att bedöma reproduktionskvaliteten.
+	Använd olika reproduktionsupplösningar och betraktningsavstånd och räkna
+	kvalitetsvärdena m.h.a måttet. Gör sedan en visuell bedömning och analysera
+	hur väl måttet stämmer med visuella bedömningen.
+	
