@@ -3,7 +3,7 @@ function [outimg, ColDist, RowDist] = addGrid(inimg,PearlsPerRow)
 % Adds a grid ontop of the image to visualize the pearls position
 
 % Calculates the dimensions of the image
-[width, height, dim] = size(inimg);
+[height, width, dim] = size(inimg);
 
 % Calculates the ratio between the height and the width of the image
 ratio = height/width;
