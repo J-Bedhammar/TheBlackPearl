@@ -11,12 +11,8 @@ countery = 1;
 lastRow = 1;
 lastCol = 1;
 padding = ColDist/20;
-abc = gcf;
 for r = 1:RowDist:x
     for c = 1 :ColDist:y
-       
-       counterx
-       countery
         if(RowDist*counterx > x || ColDist*countery > y) 
             continue;
         end
@@ -42,4 +38,8 @@ for r = 1:RowDist:x
     counterx = counterx+1;
 end
 
+axis equal
+axis off
+set(gca,'position',[0 0 1 1],'units','normalized')
 
+end
