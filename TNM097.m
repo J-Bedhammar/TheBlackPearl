@@ -21,8 +21,12 @@ indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
 
 [pearlifiedIm] = assemble(indexPearlGrid,ColDist,RowDist,size(im),pearlSingleArray)
 
+[X_no_dither,map] = rgb2ind(im,8,'nodither');
+imshow(X_no_dither,map)
 
 imshow(meanGrid)
+
+
 
 image = imGrid;
 

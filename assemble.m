@@ -10,15 +10,23 @@ counterx = 1;
 countery = 1; 
 lastRow = 1;
 lastCol = 1;
-padding  =ColDist/20;
+padding = ColDist/20;
+abc = gcf;
 for r = 1:RowDist:x
     for c = 1 :ColDist:y
+       
+       counterx
+       countery
+        if(RowDist*counterx > x || ColDist*countery > y) 
+            continue;
+        end
+       
        r1 = pearlSingleArray(1,indexMatrix(counterx,countery),1);
        g1 = pearlSingleArray(1,indexMatrix(counterx,countery),2);
        b1 = pearlSingleArray(1,indexMatrix(counterx,countery),3);
        circle = rectangle('Position',[(r+padding) (c+padding) (RowDist-2*padding) (ColDist - 2*padding)], "Curvature",[1 1] , "FaceColor", [r1,g1,b1],"EdgeColor",[r1,g1,b1]);
        
-       %pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,1) = r1;
+       pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,:) = circle;
        %pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,2) = g1;
        %pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,3) = b1;
        % indexing and access stuff
