@@ -14,7 +14,8 @@ colorArray = zeros(pearlSize,pearlPlateSize,3);
 pearlSingleArray = zeros(1,(RGBRange(1)*RGBRange(2)*RGBRange(3)),3);
 % set up steppings work 
 counter = 1;
-counter2 = 1;
+counterCol = 1;
+counterRow = 1;
 lowerLimit = 1;
 upperLimit = pearlSize;
 firstRow = 1;
@@ -32,19 +33,20 @@ for r = 1 : RGBRange(1)
             colorArray(firstRow:lastRow,lowerLimit:upperLimit,2) = colorStepG*g;
             colorArray(firstRow:lastRow,lowerLimit:upperLimit,3) = colorStepB*b;
             % range and index fix for next iteration
-            lowerLimit = pearlSize*counter;
             counter = counter+1;
-            upperLimit = pearlSize*counter;
+            lowerLimit = pearlSize*counterCol;
+            counterCol = counterCol+1;
+            upperLimit = pearlSize*counterCol;
         end
     end
     % Reset columns
     lowerLimit = 1;
     upperLimit = pearlSize;
-    counter = 1;
+    counterCol = 1;
     % Range and index for next row
-    firstRow = pearlSize*counter2 ;
-    counter2 = counter2+1;
-    lastRow = pearlSize*counter2;
+    firstRow = pearlSize*counterRow ;
+    counterRow = counterRow+1;
+    lastRow = pearlSize*counterRow;
 end
 
 pearlPlate = colorArray;
