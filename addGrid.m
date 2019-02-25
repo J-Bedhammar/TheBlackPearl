@@ -10,11 +10,14 @@ ratio = height/width;
 
 % Calculates the number of pearls per column depedning on pearls per rows
 % and the ratio of the image.
-PearlsPerCol = floor(PearlsPerRow*ratio);
+PearlsPerCol = PearlsPerRow*ratio;
 
 % Calculates the distance between the rows and cols
 ColDist = floor(width/PearlsPerRow);
 RowDist = floor(height/PearlsPerCol);
-     
+
+% Floor PearlsPerCol
+PearlsPerCol = floor(PearlsPerCol);
+
 end
 
