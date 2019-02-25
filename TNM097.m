@@ -25,26 +25,26 @@ onePearl = createPearls(pearlSingleArray, ColDist, RowDist);
 
 indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
 indexPearlGrid4 = indexColorMatch(pearlSingleArray, temp);
-%indexPearlGrid2 = indexColorMatch(pearlSingleArray2, meanGrid);
-%indexPearlGrid3 = indexColorMatch(lessPerls, meanGrid);
-%indexPearlGrid4 = indexColorMatch(pearlSingleArray, temp);
+indexPearlGrid2 = indexColorMatch(pearlSingleArray2, meanGrid);
+indexPearlGrid3 = indexColorMatch(lessPerls, meanGrid);
 
 
 figure
-[pearlifiedIm] = assemble(indexPearlGrid,ColDist,RowDist,size(im),pearlSingleArray);
+[pearlifiedIm] = assemble(indexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
 
 title("100 valda ")
-%figure
-% [pearlifiedIm2] = assemble(indexPearlGrid2,ColDist,RowDist,size(im),pearlSingleArray2);
-% title("50 valda")
-% figure
-% [pearlifiedIm3] = assemble(indexPearlGrid3,ColDist,RowDist,size(im),lessPerls);
-% title("50valda lab")
 figure
-[pearlifiedIm4] = assemble(indexPearlGrid4,ColDist,RowDist,size(im),pearlSingleArray);
+[pearlifiedIm2] = assemble(indexPearlGrid2,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray2,RowDist,ColDist);
+title("50 valda")
+figure
+[pearlifiedIm3] = assemble(indexPearlGrid3,PearlsPerCol,PearlsPerRow,(ColDist/20),lessPerls,RowDist,ColDist);
+title("50valda lab")
+figure
+[pearlifiedIm4] = assemble(indexPearlGrid4,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
 title("resize ")
-figure
 
+
+figure
 [X_no_dither,map] = rgb2ind(im,8,'nodither');
 %imshow(X_no_dither,map)
 
