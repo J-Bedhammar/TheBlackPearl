@@ -1,4 +1,4 @@
-function rgb = addPearl(Img, Center, colDist, rgb)
+function rgb = addPearl(Img, Center, colDist, rgb, background)
 
 [sr,sc] = size(Img);
 [columnsInImage rowsInImage] = meshgrid(1:sc, 1:sr);
@@ -37,9 +37,9 @@ B(circlePixels) = rgb(1,3);
 % Smol circle
 smallCirclePixels = smallCircle <= innerThreshold;
 
-R(smallCirclePixels) = 0;
-G(smallCirclePixels) = 0;
-B(smallCirclePixels) = 0;
+R(smallCirclePixels) = background;
+G(smallCirclePixels) = background;
+B(smallCirclePixels) = background;
 
 % Output
 rgb = cat(3, R, G, B);
