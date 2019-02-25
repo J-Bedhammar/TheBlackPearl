@@ -15,18 +15,6 @@ for r = 1:RowDist:x
     for c = 1 : ColDist : y
         % goes through each grid area in the og im and creates a mean value
         % for that gridim. 
-%         r1 = mean(im(lastRow:RowDist*counterx,lastCol:ColDist*countery,1));
-%         if(isempty(r1))
-%         a=RowDist*counterx
-%         lastRow
-%         
-%         c
-%         lastCol
-%         b=ColDist*countery
-%         end
-%         
-%         g1 = mean(im(lastRow:r,lastCol:c,2));
-%         b1 = mean(im(lastRow:r,lastCol:c,3));
 %         
         if(RowDist*counterx > x || ColDist*countery > y) 
             continue;

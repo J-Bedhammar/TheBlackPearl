@@ -18,7 +18,8 @@ for c = y :-ColDist:1
         if(RowDist*counterx > x || ColDist*countery > y) 
             continue;
         end
-       
+        counterx
+        countery
         r1 = pearlSingleArray(1,indexMatrix(counterx,countery),1);
         g1 = pearlSingleArray(1,indexMatrix(counterx,countery),2);
         b1 = pearlSingleArray(1,indexMatrix(counterx,countery),3);
