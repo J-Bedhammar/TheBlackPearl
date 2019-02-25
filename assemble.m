@@ -1,28 +1,24 @@
-function [pearlifiedIm] = assemble(indexMatrix,ColDist,RowDist,imSize,pearlSingleArray)
+function [pearlifiedIm] = assemble(indexMatrix,PearlsPerCol,PearlsPerRow,padding,pearlSingleArray,RowDist,ColDist)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
-x = imSize(1);
-y = imSize(2);
+x = PearlsPerRow;
+y = PearlsPerCol;
 pearlifiedIm = zeros(x,y,3);
 
 counterx = 1;
 countery = 1; 
 lastRow = 1;
 lastCol = 1;
-padding = ColDist/20;
+%padding = ColDist/20;
 
-for c = y :-ColDist:1 
-    for r = 1:RowDist:x
-
-        if(RowDist*counterx > x || ColDist*countery > y) 
-            continue;
-        end
-       
+for c = y :-1:1 
+    for r = 1:x
+        
         r1 = pearlSingleArray(1,indexMatrix(counterx,countery),1);
         g1 = pearlSingleArray(1,indexMatrix(counterx,countery),2);
         b1 = pearlSingleArray(1,indexMatrix(counterx,countery),3);
-        circle = rectangle('Position',[(r+padding) (c+padding) (RowDist-2*padding) (ColDist - 2*padding)], "Curvature",[1 1] , "FaceColor", [r1,g1,b1],"EdgeColor",[r1,g1,b1]);
+        circle = rectangle('Position',[(r*RowDist+padding) (c*ColDist+padding) (RowDist-2*padding) (ColDist - 2*padding)], "Curvature",[1 1] , "FaceColor", [r1,g1,b1],"EdgeColor",[r1,g1,b1]);
 
         pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,:) = circle;
         %pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,2) = g1;
