@@ -18,15 +18,14 @@ RGBRange = colorSteps(1);
  lessPerls = lessNumberOfPearls(pearlSingleArray,50);
 
 
+onePearl = createPearls(pearlSingleArray, ColDist, RowDist);
+ 
 % Mean colors of grid squares
 [meanGrid] = meanColorInGrid(im,ColDist,RowDist);
 
 indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
-
- indexPearlGrid2 = indexColorMatch(pearlSingleArray2, meanGrid);
- indexPearlGrid3 = indexColorMatch(lessPerls, meanGrid);
-
-
+indexPearlGrid2 = indexColorMatch(pearlSingleArray2, meanGrid);
+indexPearlGrid3 = indexColorMatch(lessPerls, meanGrid);
 
 [pearlifiedIm] = assemble(indexPearlGrid,ColDist,RowDist,size(im),pearlSingleArray);
 

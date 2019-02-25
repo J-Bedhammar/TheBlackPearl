@@ -1,5 +1,12 @@
 TO DO:
 
+- Effektivisera pärlskapandet (skapa pärlorna i förväg).
+- Imresize, pixel per pearl. (tänk meangrid)
+- Ta hänsyn till det vita/svarta området "bakom" pärlan.
+- Kolla om någon färg inte är med alls (färgomptimering)
+- Lab, polära koordinater, normalfördelning
+
+
 OBS! Koden oberoende av inmatad bild, stor/liten.
 Om utbilden är förstorad (för litet original), tala om det.
 
