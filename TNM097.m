@@ -4,7 +4,7 @@ function [ image ] = TNM097(im ,numberOfColors,numberOfL)
 
 % Add grid to image
 PearlsPerRow = 20;
-[imGrid, ColDist, RowDist] = addGrid(im, PearlsPerRow);
+[PearlsPerCol, ColDist, RowDist] = addGrid(im, PearlsPerRow);
 
 ppi = 200;
 pearlSize = 40;
