@@ -15,7 +15,7 @@ RGBRange = colorSteps(1);
 RGBRange2 = colorSteps(4);
 [pearlPlate,pearlSingleArray] = pearlColors(pearlSize,RGBRange);
 [pearlPlate2,pearlSingleArray2] = pearlColors(pearlSize,RGBRange);
-% lessPerls = lessNumberOfPearls(pearlSingleArray,50);
+ lessPerls = lessNumberOfPearls(pearlSingleArray,50);
 
 %imshow(pearlPlate);
 
@@ -23,17 +23,19 @@ RGBRange2 = colorSteps(4);
 [meanGrid] = meanColorInGrid(im,ColDist,RowDist);
 
 indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
-% indexPearlGrid2 = indexColorMatch(pearlSingleArray2, meanGrid);
-% indexPearlGrid3 = indexColorMatch(lessPerls, meanGrid);
+ indexPearlGrid2 = indexColorMatch(pearlSingleArray2, meanGrid);
+ indexPearlGrid3 = indexColorMatch(lessPerls, meanGrid);
 
 
 figure
 [pearlifiedIm] = assemble(indexPearlGrid,ColDist,RowDist,size(im),pearlSingleArray);
-% figure
-% [pearlifiedIm2] = assemble(indexPearlGrid2,ColDist,RowDist,size(im),pearlSingleArray2);
-% figure
-% [pearlifiedIm2] = assemble(indexPearlGrid3,ColDist,RowDist,size(im),lessPerls);
-
+title("100 valda ")
+ figure
+ [pearlifiedIm2] = assemble(indexPearlGrid2,ColDist,RowDist,size(im),pearlSingleArray2);
+ title("50 valda")
+ figure
+ [pearlifiedIm2] = assemble(indexPearlGrid3,ColDist,RowDist,size(im),lessPerls);
+title("50valda lab")
 
 [X_no_dither,map] = rgb2ind(im,8,'nodither');
 
