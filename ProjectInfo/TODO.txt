@@ -1,8 +1,8 @@
 TO DO:
 
-- Effektivisera pärlskapandet (skapa pärlorna i förväg).
+- Effektivisera pärlskapandet (skapa pärlorna i förväg). (KLART)
 - Imresize, pixel per pearl. (tänk meangrid)
-- Ta hänsyn till det vita/svarta området "bakom" pärlan.
+- Ta hänsyn till det vita/svarta området "bakom" pärlan. (KLART för "egna" pärlor)
 - Kolla om någon färg inte är med alls (färgomptimering)
 - Lab, polära koordinater, normalfördelning
 
