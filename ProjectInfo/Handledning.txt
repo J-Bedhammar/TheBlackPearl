@@ -13,3 +13,7 @@ Frågor:
 
 6. Optimering av färger, finns det något bättre sätt?
 
+skala ner orginal så en pixel per pärla 
+
+ta hänsyn till hela området ( prälan + lite vitt ) 
+ Kolla om någon inte är med alls 
