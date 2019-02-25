@@ -1,4 +1,4 @@
-function [outimg, ColDist, RowDist] = addGrid(inimg,PearlsPerRow)
+function [PearlsPerCol, ColDist, RowDist] = addGrid(inimg,PearlsPerRow)
 % Author: Oliver Johansson
 % Adds a grid ontop of the image to visualize the pearls position
 
@@ -15,17 +15,6 @@ PearlsPerCol = floor(PearlsPerRow*ratio);
 % Calculates the distance between the rows and cols
 ColDist = floor(width/PearlsPerRow);
 RowDist = floor(height/PearlsPerCol);
-
-outimg = inimg;
-
-% Adds the black lines to the image
-for w = 1:ColDist:width
-     outimg(:,w,:) = 0;
-end
-
-for h = 1:RowDist:height
-    outimg(h,:,:) = 0;
-end
      
 end
 
