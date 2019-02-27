@@ -19,7 +19,7 @@ for c = y :-1:1
         g1 = pearlSingleArray(1,indexMatrix(counterx,countery),2);
         b1 = pearlSingleArray(1,indexMatrix(counterx,countery),3);
         circle = rectangle('Position',[(r*RowDist+padding) (c*ColDist+padding) (RowDist-2*padding) (ColDist - 2*padding)], "Curvature",[1 1] , "FaceColor", [r1,g1,b1],"EdgeColor",[r1,g1,b1]);
-
+        hole = rectangle('Position',[(r*RowDist + RowDist/3 +padding) (c*ColDist + ColDist/3 +padding) (RowDist- RowDist/1.5 - 2*padding) (ColDist - ColDist/1.5 - 2*padding)], "Curvature",[1 1] , "FaceColor", [1,1,1],"EdgeColor",[1,1,1]);
         pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,:) = circle;
         %pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,2) = g1;
         %pearlifiedIm(lastRow:RowDist*counterx,lastCol:ColDist*countery,3) = b1;

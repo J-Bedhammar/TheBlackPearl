@@ -1,10 +1,10 @@
 TO DO:
 
-- Effektivisera pärlskapandet (skapa pärlorna i förväg).
-- Imresize, pixel per pearl. (tänk meangrid)
-- Ta hänsyn till det vita/svarta området "bakom" pärlan.
-- Kolla om någon färg inte är med alls (färgomptimering)
+- Byt ut Rectangle: Skapa alla "bilder" med våra egna pärlor
 - Lab, polära koordinater, normalfördelning
+- S-CieLab kvalitetsmått
+    - Använd olika reproduktionsupplösningar och betraktningsavstånd
+    - Visuell bedömning och analysera måttet (jämför)
 
 
 OBS! Koden oberoende av inmatad bild, stor/liten.
@@ -34,4 +34,16 @@ Betyg 4:
 	Använd olika reproduktionsupplösningar och betraktningsavstånd och räkna
 	kvalitetsvärdena m.h.a måttet. Gör sedan en visuell bedömning och analysera
 	hur väl måttet stämmer med visuella bedömningen.
-	
+
+
+KLART
+- Imresize, pixel per pearl. (tänk meangrid)
+- Effektivisera pärlskapandet (skapa pärlorna i förväg)
+- Ta hänsyn till det vita/svarta området "bakom" pärlan. (KLART för "egna" pärlor)
+- Kolla om någon färg inte är med alls (färgomptimering)
+
+
+
+
+
+END
