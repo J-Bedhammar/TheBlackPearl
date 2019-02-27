@@ -4,7 +4,7 @@ function [ image ] = TNM097(IM, numberOfColors, numberOfL)
 
 % Add grid to image
 pearlSize = 10;
-[x,y,z] = size(IM)
+[x,y,z] = size(IM);
 newY = roundn(y,1);
 newX = roundn(x,1);
 % resize so that pearlsize matches
@@ -33,10 +33,10 @@ pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "
 
 % Find matching colors - image and pearls
 indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
-% [RemovedNonExistingPearls,newIndexPearlGrid,limitedNumberOfPearls] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
-% lessPerlsRemovedNoneExisting = lessNumberOfPearls(RemovedNonExistingPearls,50);
-% indexPearlGridRemovedNonExisting = indexColorMatch(lessPerlsRemovedNoneExisting, meanGrid);
-% indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedNumberOfPearls, meanGrid);
+[RemovedNonExistingPearls,newIndexPearlGrid,limitedNumberOfPearls] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
+lessPerlsRemovedNoneExisting = lessNumberOfPearls(RemovedNonExistingPearls,50);
+indexPearlGridRemovedNonExisting = indexColorMatch(lessPerlsRemovedNoneExisting, meanGrid);
+indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedNumberOfPearls, meanGrid);
 
 % Create image with the pearls in pearlsCollection. 
 allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection);
