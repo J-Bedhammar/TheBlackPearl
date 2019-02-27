@@ -72,7 +72,7 @@ end
 %%  Color Transformation %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-disp('Performing color transformations ...');
+%disp('Performing color transformations ...');
 
 % Convert XYZ or LMS representation to Poirson&Wandell opponent
 % representation.
@@ -102,7 +102,7 @@ clear image1; clear image2;
 %%  Prepare filters %%
 %%%%%%%%%%%%%%%%%%%%%%
 
-disp('Preparing filters ...');
+%disp('Preparing filters ...');
 
 if (dimension == 1)
   [k1, k2, k3] = separableFilters(sampPerDeg, 1);
@@ -132,18 +132,18 @@ if (dimension == 1)
   w1 = pad4conv(w1, length(k1));
   w2 = pad4conv(w2, length(k2));
   w3 = pad4conv(w3, length(k3));
-  disp('Filtering BW plane of image1 ...');
+  %disp('Filtering BW plane of image1 ...');
   p1 = resize(conv(w1, k1), wsize);
-  disp('Filtering RG plane of image1 ...');
+  %disp('Filtering RG plane of image1 ...');
   p2 = resize(conv(w2, k2), wsize);
-  disp('Filtering BY plane of image1 ...');
+  %disp('Filtering BY plane of image1 ...');
   p3 = resize(conv(w3, k3), wsize);
 else
-  disp('Filtering BW plane of image1 ...');
+  %disp('Filtering BW plane of image1 ...');
   p1 = separableConv(w1, k1, abs(k1));
-  disp('Filtering RG plane of image1 ...');
+  %disp('Filtering RG plane of image1 ...');
   p2 = separableConv(w2, k2, abs(k2));
-  disp('Filtering BY plane of image1 ...');
+  %disp('Filtering BY plane of image1 ...');
   p3 = separableConv(w3, k3, abs(k3));
 end
 
@@ -164,18 +164,18 @@ if (nargin>3)
     w1 = pad4conv(w1, length(k1));
     w2 = pad4conv(w2, length(k2));
     w3 = pad4conv(w3, length(k3));
-    disp('Filtering BW plane of image2 ...');
+    %disp('Filtering BW plane of image2 ...');
     p1 = resize(conv(w1, k1), wsize);
-    disp('Filtering RG plane of image2 ...');
+    %disp('Filtering RG plane of image2 ...');
     p2 = resize(conv(w2, k2), wsize);
-    disp('Filtering BY plane of image2 ...');
+    %disp('Filtering BY plane of image2 ...');
     p3 = resize(conv(w3, k3), wsize);
   else
-    disp('Filtering BW plane of image2 ...');
+    %disp('Filtering BW plane of image2 ...');
     p1 = separableConv(w1, k1, abs(k1));
-    disp('Filtering RG plane of image2 ...');
+    %disp('Filtering RG plane of image2 ...');
     p2 = separableConv(w2, k2, abs(k2));
-    disp('Filtering BY plane of image2 ...');
+    %disp('Filtering BY plane of image2 ...');
     p3 = separableConv(w3, k3, abs(k3));
   end
   new2 = [p1 p2 p3];
@@ -190,7 +190,7 @@ clear p1 p2 p3 w1 w2 w3 k1 k2 k3;
 if (nargin<4)       % return filtered image1 only
   result = reshape(new1, imsize);
 else                % compute difference image
-  disp('Computing CIELAB differences ...');
+  %disp('Computing CIELAB differences ...');
   result = changeColorSpace(new1, cmatrix('opp2xyz', xyztype));
   result2 = changeColorSpace(new2, cmatrix('opp2xyz', xyztype));
 %  result = result .* (result>0);
