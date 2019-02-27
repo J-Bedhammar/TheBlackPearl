@@ -24,25 +24,20 @@ onePearl = createPearls(pearlSingleArray, ColDist, RowDist);
 [meanGrid] = meanColorInGrid(im,ColDist,RowDist);
 
 indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
-indexPearlGrid4 = indexColorMatch(pearlSingleArray, temp);
-indexPearlGrid2 = indexColorMatch(pearlSingleArray2, meanGrid);
-indexPearlGrid3 = indexColorMatch(lessPerls, meanGrid);
+[RemovedNonExistingPearls,newIndexPearlGrid,limitedNumberOfPearls] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
+lessPerlsRemovedNoneExisting = lessNumberOfPearls(RemovedNonExistingPearls,50);
+indexPearlGridRemovedNonExisting = indexColorMatch(lessPerlsRemovedNoneExisting, meanGrid);
+indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedNumberOfPearls, meanGrid);
 
 
 figure
 [pearlifiedIm] = assemble(indexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
-
-title("100 valda ")
 figure
-[pearlifiedIm2] = assemble(indexPearlGrid2,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray2,RowDist,ColDist);
-title("50 valda")
+[pearlifiedIm2] = assemble(newIndexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),RemovedNonExistingPearls,RowDist,ColDist);
 figure
-[pearlifiedIm3] = assemble(indexPearlGrid3,PearlsPerCol,PearlsPerRow,(ColDist/20),lessPerls,RowDist,ColDist);
-title("50valda lab")
+[pearlifiedIm3] = assemble(indexPearlGridRemovedNonExisting,PearlsPerCol,PearlsPerRow,(ColDist/20),lessPerlsRemovedNoneExisting,RowDist,ColDist);
 figure
-[pearlifiedIm4] = assemble(indexPearlGrid4,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
-title("resize ")
-
+[pearlifiedIm4] = assemble(indexPearlGridRemovedNonExistingAndReduced,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedNumberOfPearls,RowDist,ColDist);
 
 figure
 [X_no_dither,map] = rgb2ind(im,8,'nodither');
