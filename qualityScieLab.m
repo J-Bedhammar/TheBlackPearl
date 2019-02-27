@@ -17,6 +17,7 @@ SPD = ppi * d * tan(pi/180);
 % Light
 whitePoint = [95.05, 100, 108.9];  % CIED65
 
+addpath('./scielab')
 % S-CieLab
 quality = mean(mean(scielab(SPD, original, reproduction, whitePoint, 'xyz')));
 

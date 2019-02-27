@@ -1,22 +1,25 @@
-function [ image ] = TNM097(im, numberOfColors, numberOfL)
+function [ image ] = TNM097(IM, numberOfColors, numberOfL)
 % TNM097
 % insert code that calls functions here
 
 % Add grid to image
-PearlsPerRow = 120;
-pearlSize = 40;
-[x,y] = size(im)
-floor(y/40)
+pearlSize = 10;
+[x,y,z] = size(IM)
+newY = roundn(y,1);
+newX = roundn(x,1);
+% resize so that pearlsize matches
+im = imresize(IM,[newX,newY]);
 %PearlsPerRow = floor(x/pearlSize)
-[PearlsPerCol, ColDist, RowDist] = addGrid(im, PearlsPerRow);
-
-temp = imresize(im,[PearlsPerCol,PearlsPerRow]);
-
-ppi = 200;
+[PearlsPerRow, PearlsPerCol] = addGrid(im, pearlSize);
+ColDist=pearlSize;
+RowDist=pearlSize;
+% temp is used if wanting to compare resized to pixel size
+%temp = imresize(im,[PearlsPerCol,PearlsPerRow]);
 
 % Pearl colors:
 % 1 = 100, 2 = 80, 3 = 64, 4 = 48, 5 = 27, 6 = 18, 7 = 12, 8 = 8, 9 = 4
 RGBRange = colorSteps(1);
+% Set up pearls color in list
 [pearlPlate,pearlSingleArray] = pearlColors(pearlSize,RGBRange);
 [pearlPlate2,pearlSingleArray2] = pearlColors(pearlSize,RGBRange);
 lessPerls = lessNumberOfPearls(pearlSingleArray,50);
@@ -47,6 +50,12 @@ subplot(1,2,2)
 imshow(allThemPearlsBalanced)
 title("Balanced")
 
+
+[quality] = qualityScieLab( im, allThemPearls, 1920, 20.8661417, 20 )
+[quality1] = qualityScieLab( im, allThemPearlsBalanced, 1920, 20.8661417, 20 )
+
+
+
 % Create image with rectangle
 figure
 [pearlifiedIm] = assemble(indexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
@@ -56,6 +65,7 @@ figure
 [pearlifiedIm3] = assemble(indexPearlGridRemovedNonExisting,PearlsPerCol,PearlsPerRow,(ColDist/20),lessPerlsRemovedNoneExisting,RowDist,ColDist);
 figure
 [pearlifiedIm4] = assemble(indexPearlGridRemovedNonExistingAndReduced,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedNumberOfPearls,RowDist,ColDist);
+
 
 figure
 [X_no_dither,map] = rgb2ind(im,8,'nodither');

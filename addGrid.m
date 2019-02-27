@@ -8,7 +8,7 @@ function [PearlsPerRow, PearlsPerCol] = addGrid(inimg,PearlSize)
 PearlsPerRow = floor(Width/PearlSize);
 
 % Calculates the ratio between the height and the width of the image
-ratio = height/width;
+ratio = Height/Width;
 
 % Calculates the number of pearls per column depedning on pearls per rows
 % and the ratio of the image.
