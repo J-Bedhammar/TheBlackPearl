@@ -17,7 +17,7 @@ ColDist = floor(width/PearlsPerRow);
 RowDist = floor(height/PearlsPerCol);
 
 % Floor PearlsPerCol
-PearlsPerCol = floor(PearlsPerCol);
+PearlsPerCol = ceil(PearlsPerCol);
 
 end
 

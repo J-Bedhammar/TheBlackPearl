@@ -4,12 +4,15 @@ function [ image ] = TNM097(im, numberOfColors, numberOfL)
 
 % Add grid to image
 PearlsPerRow = 120;
+pearlSize = 40;
+[x,y] = size(im)
+floor(y/40)
+%PearlsPerRow = floor(x/pearlSize)
 [PearlsPerCol, ColDist, RowDist] = addGrid(im, PearlsPerRow);
 
 temp = imresize(im,[PearlsPerCol,PearlsPerRow]);
 
 ppi = 200;
-pearlSize = 40;
 
 % Pearl colors:
 % 1 = 100, 2 = 80, 3 = 64, 4 = 48, 5 = 27, 6 = 18, 7 = 12, 8 = 8, 9 = 4
@@ -19,18 +22,18 @@ RGBRange = colorSteps(1);
 lessPerls = lessNumberOfPearls(pearlSingleArray,50);
 
  % Create pearls out of the pearlSingleArray
-pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, "black", "nope");
-pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, "black", "balanced");
+pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope");
+pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced");
 
 % Mean colors of grid squares
 [meanGrid] = meanColorInGrid(im,ColDist,RowDist);
 
 % Find matching colors - image and pearls
 indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
-[RemovedNonExistingPearls,newIndexPearlGrid,limitedNumberOfPearls] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
-lessPerlsRemovedNoneExisting = lessNumberOfPearls(RemovedNonExistingPearls,50);
-indexPearlGridRemovedNonExisting = indexColorMatch(lessPerlsRemovedNoneExisting, meanGrid);
-indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedNumberOfPearls, meanGrid);
+% [RemovedNonExistingPearls,newIndexPearlGrid,limitedNumberOfPearls] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
+% lessPerlsRemovedNoneExisting = lessNumberOfPearls(RemovedNonExistingPearls,50);
+% indexPearlGridRemovedNonExisting = indexColorMatch(lessPerlsRemovedNoneExisting, meanGrid);
+% indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedNumberOfPearls, meanGrid);
 
 % Create image with the pearls in pearlsCollection. 
 allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection);
