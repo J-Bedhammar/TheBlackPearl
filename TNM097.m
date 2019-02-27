@@ -33,10 +33,10 @@ pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "
 
 % Find matching colors - image and pearls
 indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
-[RemovedNonExistingPearls,newIndexPearlGrid,limitedNumberOfPearls] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
-lessPerlsRemovedNoneExisting = lessNumberOfPearls(RemovedNonExistingPearls,50);
-indexPearlGridRemovedNonExisting = indexColorMatch(lessPerlsRemovedNoneExisting, meanGrid);
-indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedNumberOfPearls, meanGrid);
+[RemovedNonExistingPearls,newIndexPearlGrid,limitedByFrequency] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
+limitedBySum = lessNumberOfPearls(RemovedNonExistingPearls,50);
+indexPearlGridRemovedNonExisting = indexColorMatch(limitedBySum, meanGrid);
+indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedByFrequency, meanGrid);
 
 % Create image with the pearls in pearlsCollection. 
 allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection);
@@ -62,9 +62,35 @@ figure
 figure
 [pearlifiedIm2] = assemble(newIndexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),RemovedNonExistingPearls,RowDist,ColDist);
 figure
-[pearlifiedIm3] = assemble(indexPearlGridRemovedNonExisting,PearlsPerCol,PearlsPerRow,(ColDist/20),lessPerlsRemovedNoneExisting,RowDist,ColDist);
+[pearlifiedIm3] = assemble(indexPearlGridRemovedNonExisting,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedBySum,RowDist,ColDist);
 figure
-[pearlifiedIm4] = assemble(indexPearlGridRemovedNonExistingAndReduced,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedNumberOfPearls,RowDist,ColDist);
+[pearlifiedIm4] = assemble(indexPearlGridRemovedNonExistingAndReduced,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedByFrequency,RowDist,ColDist);
+
+pearlCollection2 = createPearls(RemovedNonExistingPearls, ColDist, RowDist, im, "nope");
+pearlCollection3 = createPearls(limitedBySum, ColDist, RowDist, im, "nope");
+pearlCollection4 = createPearls(limitedByFrequency, ColDist, RowDist, im, "nope");
+
+allThemPearls2 = drawCircles(PearlsPerCol, PearlsPerRow, newIndexPearlGrid, pearlCollection2);
+allThemPearls3 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExisting, pearlCollection3);
+allThemPearls4 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExistingAndReduced, pearlCollection4);
+
+figure
+subplot(2,2,1)
+imshow(im)
+title("Original")
+subplot(2,2,2)
+imshow(allThemPearls2)
+title("Removed non-existing")
+[quality2] = qualityScieLab( im, allThemPearls2, 1920, 20.8661417, 20 )
+subplot(2,2,3)
+imshow(allThemPearls3)
+title("By sum")
+[quality3] = qualityScieLab( im, allThemPearls3, 1920, 20.8661417, 20 )
+subplot(2,2,4)
+imshow(allThemPearls4)
+title("By frequency")
+[quality4] = qualityScieLab( im, allThemPearls4, 1920, 20.8661417, 20 )
+
 
 
 figure
