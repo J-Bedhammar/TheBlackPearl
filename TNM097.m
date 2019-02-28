@@ -14,7 +14,7 @@ im = imresize(IM,[newX,newY]);
 ColDist=pearlSize;
 RowDist=pearlSize;
 % temp is used if wanting to compare resized to pixel size
-%temp = imresize(im,[PearlsPerCol,PearlsPerRow]);
+resizedIm = imresize(im,[PearlsPerCol,PearlsPerRow]);
 
 % Pearl colors:
 % 1 = 100, 2 = 80, 3 = 64, 4 = 48, 5 = 27, 6 = 18, 7 = 12, 8 = 8, 9 = 4
@@ -37,6 +37,8 @@ indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
 limitedBySum = lessNumberOfPearls(RemovedNonExistingPearls,50);
 indexPearlGridRemovedNonExisting = indexColorMatch(limitedBySum, meanGrid);
 indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedByFrequency, meanGrid);
+indexPearlGridResized = indexColorMatch(pearlSingleArray,resizedIm );
+
 
 % Create image with the pearls in pearlsCollection. 
 allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection);
@@ -59,20 +61,31 @@ title("Balanced")
 % Create image with rectangle
 figure
 [pearlifiedIm] = assemble(indexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
+title("100pearls")
 figure
 [pearlifiedIm2] = assemble(newIndexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),RemovedNonExistingPearls,RowDist,ColDist);
+title("removed non existing")
 figure
 [pearlifiedIm3] = assemble(indexPearlGridRemovedNonExisting,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedBySum,RowDist,ColDist);
+title("by sum")
 figure
 [pearlifiedIm4] = assemble(indexPearlGridRemovedNonExistingAndReduced,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedByFrequency,RowDist,ColDist);
+title("by frequency")
+figure
+[pearlifiedIm5] = assemble(indexPearlGridResized,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
+title("resize")
 
 pearlCollection2 = createPearls(RemovedNonExistingPearls, ColDist, RowDist, im, "nope");
 pearlCollection3 = createPearls(limitedBySum, ColDist, RowDist, im, "nope");
 pearlCollection4 = createPearls(limitedByFrequency, ColDist, RowDist, im, "nope");
+pearlCollection5 = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope");
 
 allThemPearls2 = drawCircles(PearlsPerCol, PearlsPerRow, newIndexPearlGrid, pearlCollection2);
 allThemPearls3 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExisting, pearlCollection3);
 allThemPearls4 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExistingAndReduced, pearlCollection4);
+allThemPearls5 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridResized, pearlCollection5);
+allThemPearls6 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection5);
+
 
 figure
 subplot(2,2,1)
@@ -91,6 +104,16 @@ imshow(allThemPearls4)
 title("By frequency")
 [quality4] = qualityScieLab( im, allThemPearls4, 1920, 20.8661417, 20 )
 
+figure
+subplot(1,2,1)
+imshow(allThemPearls5)
+title("100 pearls")
+[quality5] = qualityScieLab( im, allThemPearls5, 1920, 20.8661417, 20 )
+
+subplot(1,2,2)
+imshow(allThemPearls6)
+title("100 pearls resized")
+[quality6] = qualityScieLab( im, allThemPearls6, 1920, 20.8661417, 20 )
 
 
 figure
