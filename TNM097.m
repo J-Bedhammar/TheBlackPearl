@@ -14,9 +14,11 @@ im = imresize(IM,[newX,newY]);
 %PearlsPerRow = floor(x/pearlSize)
 % 1 = as normal, anything else modifies pearls per row
 [PearlsPerRow, PearlsPerCol] = addGrid(im, pearlSize,1);
-[PearlsPerRow2, PearlsPerCol2] = addGrid(im, pearlSize, rowPearls);
+[PearlsPerRow2, PearlsPerCol2] = addGrid(im, pearlSize2, rowPearls);
 ColDist=pearlSize;
 RowDist=pearlSize;
+ColDist2=pearlSize2;
+RowDist2=pearlSize2;
 % temp is used if wanting to compare resized to pixel size
 resizedIm = imresize(im,[PearlsPerCol,PearlsPerRow]);
 resizedIm2 = imresize(im,[PearlsPerCol2,PearlsPerRow2]);
@@ -30,9 +32,16 @@ RGBRange = colorSteps(1);
 [pearlPlate2,pearlSingleArray2] = pearlColors(pearlSize2,RGBRange);
 lessPerls = lessNumberOfPearls(pearlSingleArray,50);
 
+%Dither. to extrect the 50 most viable colors
+[X_no_dither,dithermap] = rgb2ind(im,50,'nodither');
+
+map(1,:,:) = dithermap;
  % Create pearls out of the pearlSingleArray
-pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope");
-pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced");
+ % whichBackgrund, 0 = BW, 1 = BWG, 2 = mean value
+pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 0);
+pearlCollectionBWG = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 1);
+pearlCollectionMean = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 2);
+pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced", 0);
 
 % Mean colors of grid squares
 [meanGrid] = meanColorInGrid(im,ColDist,RowDist);
@@ -45,11 +54,27 @@ indexPearlGridRemovedNonExisting = indexColorMatch(limitedBySum, meanGrid);
 indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedByFrequency, meanGrid);
 indexPearlGridResized = indexColorMatch(pearlSingleArray,resizedIm);
 PearlGridRezised = indexColorMatch(pearlSingleArray2,resizedIm2);
+ditherGridRezised = indexColorMatch(map,resizedIm2);
+
+
 
 
 % Create image with the pearls in pearlsCollection. 
 allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection);
-allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBalanced);
+allThemPearlsBWG = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBWG);
+allThemPearlsMean = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionMean);
+% allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBalanced);
+
+%Plot pearls - different background settings
+subplot(1,3,1)
+imshow(allThemPearls)
+title("BW")
+subplot(1,3,2)
+imshow(allThemPearlsBWG)
+title("BWG")
+subplot(1,3,3)
+imshow(allThemPearlsMean)
+title("Mean")
 
 % Plot pearls - unbalanced and balanced
 % subplot(1,2,1)
@@ -61,6 +86,8 @@ allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, 
 
 
 [quality] = qualityScieLab( im, allThemPearls, 1920, 20.8661417, 20 )
+[qualityBWG] = qualityScieLab( im, allThemPearlsBWG, 1920, 20.8661417, 20 )
+[qualityMean] = qualityScieLab( im, allThemPearlsMean, 1920, 20.8661417, 20 )
 [quality1] = qualityScieLab( im, allThemPearlsBalanced, 1920, 20.8661417, 20 )
 
 % Create image with rectangle
@@ -84,6 +111,7 @@ pearlCollection2 = createPearls(RemovedNonExistingPearls, ColDist, RowDist, im, 
 pearlCollection3 = createPearls(limitedBySum, ColDist, RowDist, im, "nope");
 pearlCollection4 = createPearls(limitedByFrequency, ColDist, RowDist, im, "nope");
 pearlCollection5 = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope");
+ditherCollection = createPearls(map, ColDist2, RowDist2, im, "nope");
 
 allThemPearls2 = drawCircles(PearlsPerCol, PearlsPerRow, newIndexPearlGrid, pearlCollection2);
 allThemPearls3 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExisting, pearlCollection3);
@@ -91,6 +119,8 @@ allThemPearls4 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNo
 allThemPearls5 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridResized, pearlCollection5);
 allThemPearls6 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection5);
 allThemPearls7 = drawCircles(PearlsPerCol2, PearlsPerRow2, PearlGridRezised, pearlCollection5);
+ditherPearls = drawCircles(PearlsPerCol2, PearlsPerRow2, ditherGridRezised, ditherCollection);
+
 
 figure
 subplot(2,2,1)
