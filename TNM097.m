@@ -67,7 +67,6 @@ ditherGridRezised = indexColorMatch(map,resizedIm2);
 allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection);
 allThemPearlsBWG = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBWG);
 allThemPearlsMean = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionMean);
-allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBalanced);
 
 
 
