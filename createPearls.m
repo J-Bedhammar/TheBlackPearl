@@ -10,9 +10,9 @@ if(whichBackground == 0)    % Black and white
        background = "black";
    end
 elseif(whichBackground == 1) % Black, white and gray
-    if(meanImColor >= 0.7)
+    if(meanImColor >= 0.66)
        background = "white";
-    elseif(meanImColor <= 0.3)
+    elseif(meanImColor <= 0.33)
         background = "black";
     else
         background = "gray";
