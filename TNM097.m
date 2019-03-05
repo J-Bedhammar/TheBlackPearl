@@ -39,6 +39,7 @@ map(1,:,:) = dithermap;
  % Create pearls out of the pearlSingleArray
  % whichBackgrund, 0 = BW, 1 = BWG, 2 = mean value
 pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 0);
+pearlCollection2 = createPearls(pearlSingleArray2, ColDist, RowDist, im, "nope", 0);
 pearlCollectionBWG = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 1);
 pearlCollectionMean = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 2);
 %pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced", 0);
@@ -56,39 +57,11 @@ indexPearlGridResized = indexColorMatch(pearlSingleArray,resizedIm);
 PearlGridRezised = indexColorMatch(pearlSingleArray2,resizedIm2);
 ditherGridRezised = indexColorMatch(map,resizedIm2);
 
-
-
-
 % Create image with the pearls in pearlsCollection. 
 allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection);
 allThemPearlsBWG = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBWG);
 allThemPearlsMean = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionMean);
 % allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBalanced);
-
-%Plot pearls - different background settings
-subplot(1,3,1)
-imshow(allThemPearls)
-title("BW")
-subplot(1,3,2)
-imshow(allThemPearlsBWG)
-title("BWG")
-subplot(1,3,3)
-imshow(allThemPearlsMean)
-title("Mean")
-
-% Plot pearls - unbalanced and balanced
-% subplot(1,2,1)
-% imshow(allThemPearls)
-% title("Unbalanced")
-% subplot(1,2,2)
-% imshow(allThemPearlsBalanced)
-% title("Balanced")
-
-
-[quality] = qualityScieLab( im, allThemPearls, 1920, 20.8661417, 20 )
-[qualityBWG] = qualityScieLab( im, allThemPearlsBWG, 1920, 20.8661417, 20 )
-[qualityMean] = qualityScieLab( im, allThemPearlsMean, 1920, 20.8661417, 20 )
-%[quality1] = qualityScieLab( im, allThemPearlsBalanced, 1920, 20.8661417, 20 )
 
 % Create image with rectangle
 % figure
@@ -121,6 +94,38 @@ allThemPearls6 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCo
 allThemPearls7 = drawCircles(PearlsPerCol2, PearlsPerRow2, PearlGridRezised, pearlCollection5);
 ditherPearls = drawCircles(PearlsPerCol2, PearlsPerRow2, ditherGridRezised, ditherCollection);
 
+% Find matching colors - image and pearls
+indexPearlGridPearl = indexColorMatchPearls(pearlSingleArray, meanGrid,pearlCollection);
+[RemovedNonExistingPearls2,newIndexPearlGrid2,limitedByFrequency2] = removeNonExistingColors(pearlSingleArray,indexPearlGridPearl,50);
+limitedBySum2 = lessNumberOfPearls(RemovedNonExistingPearls2,50);
+indexPearlGridRemovedNonExisting2 = indexColorMatch(limitedBySum2, meanGrid);
+indexPearlGridRemovedNonExistingAndReduced2 = indexColorMatch(limitedByFrequency2, meanGrid);
+
+pearlCollection22 = createPearls(RemovedNonExistingPearls2, ColDist, RowDist, im, "nope",0);
+pearlCollection32 = createPearls(limitedBySum2, ColDist, RowDist, im, "nope",0);
+pearlCollection42 = createPearls(limitedByFrequency2, ColDist, RowDist, im, "nope",0);
+
+allThemPearls22 = drawCircles(PearlsPerCol, PearlsPerRow, newIndexPearlGrid2, pearlCollection22);
+allThemPearls32 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExisting2, pearlCollection32);
+allThemPearls42 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExistingAndReduced2, pearlCollection42);
+
+%Plot pearls - different background settings
+subplot(1,3,1)
+imshow(allThemPearls)
+title("BW")
+subplot(1,3,2)
+imshow(allThemPearlsBWG)
+title("BWG")
+subplot(1,3,3)
+imshow(allThemPearlsMean)
+title("Mean")
+ 
+[quality] = qualityScieLab( im, allThemPearls, 1920, 20.8661417, 20 )
+[qualityBWG] = qualityScieLab( im, allThemPearlsBWG, 1920, 20.8661417, 20 )
+[qualityMean] = qualityScieLab( im, allThemPearlsMean, 1920, 20.8661417, 20 )
+
+
+
 
 figure
 subplot(2,2,1)
@@ -138,7 +143,24 @@ subplot(2,2,4)
 imshow(allThemPearls4)
 title("By frequency")
 [quality4] = qualityScieLab( im, allThemPearls4, 1920, 20.8661417, 20 )
+figure
+subplot(2,2,1)
+imshow(im)
+title("Original")
+subplot(2,2,2)
+imshow(allThemPearls22)
+title("Removed non-existing")
+[quality22] = qualityScieLab( im, allThemPearls22, 1920, 20.8661417, 20 )
+subplot(2,2,3)
+imshow(allThemPearls32)
+title("By sum")
+[quality32] = qualityScieLab( im, allThemPearls32, 1920, 20.8661417, 20 )
+subplot(2,2,4)
+imshow(allThemPearls42)
+title("By frequency")
+[quality42] = qualityScieLab( im, allThemPearls42, 1920, 20.8661417, 20 )
 
+ 
 figure
 subplot(1,2,1)
 imshow(allThemPearls5)
@@ -150,13 +172,10 @@ imshow(allThemPearls6)
 title("100 pearls resized")
 [quality6] = qualityScieLab( im, allThemPearls6, 1920, 20.8661417, 20 )
 
+% figure
+% [X_no_dither,map] = rgb2ind(im,8,'nodither');
+% %imshow(X_no_dither,map)
 
-figure
-[X_no_dither,map] = rgb2ind(im,8,'nodither');
-%imshow(X_no_dither,map)
-
-%imshow(pearlPlate)
-
-image = pearlifiedIm;
+image = allThemPearls22;
 
 end
