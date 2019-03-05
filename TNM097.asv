@@ -5,7 +5,6 @@ function [ image ] = TNM097(IM, numberOfColors, numberOfL)
 % Add grid to image
 pearlSize = 10;
 pearlSize2 = 27;
-rowPearls = 100;
 [x,y,z] = size(IM);
 newY = roundn(y,1);
 newX = roundn(x,1);
@@ -14,7 +13,7 @@ im = imresize(IM,[newX,newY]);
 %PearlsPerRow = floor(x/pearlSize)
 % 1 = as normal, anything else modifies pearls per row
 [PearlsPerRow, PearlsPerCol] = addGrid(im, pearlSize,1);
-[PearlsPerRow2, PearlsPerCol2] = addGrid(im, pearlSize, rowPearls);
+[PearlsPerRow2, PearlsPerCol2] = addGrid(im, pearlSize, 40);
 ColDist=pearlSize;
 RowDist=pearlSize;
 % temp is used if wanting to compare resized to pixel size
@@ -27,7 +26,7 @@ resizedIm2 = imresize(im,[PearlsPerCol2,PearlsPerRow2]);
 RGBRange = colorSteps(1);
 % Set up pearls color in list
 [pearlPlate,pearlSingleArray] = pearlColors(pearlSize,RGBRange);
-[pearlPlate2,pearlSingleArray2] = pearlColors(pearlSize2,RGBRange);
+[pearlPlate2,pearlSingleArray2] = pearlColors(pearlSize,RGBRange);
 lessPerls = lessNumberOfPearls(pearlSingleArray,50);
 
  % Create pearls out of the pearlSingleArray
@@ -38,13 +37,13 @@ pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "
 [meanGrid] = meanColorInGrid(im,ColDist,RowDist);
 
 % Find matching colors - image and pearls
-indexPearlGrid = indexColorMatchPearls(pearlSingleArray, meanGrid,pearlCollection);
+indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
 [RemovedNonExistingPearls,newIndexPearlGrid,limitedByFrequency] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
 limitedBySum = lessNumberOfPearls(RemovedNonExistingPearls,50);
 indexPearlGridRemovedNonExisting = indexColorMatch(limitedBySum, meanGrid);
 indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedByFrequency, meanGrid);
 indexPearlGridResized = indexColorMatch(pearlSingleArray,resizedIm);
-PearlGridRezised = indexColorMatch(pearlSingleArray2,resizedIm2);
+PearlGridRezised = indexColorMatch(pearlSingleArray,resizedIm);
 
 
 % Create image with the pearls in pearlsCollection. 
@@ -52,33 +51,35 @@ allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCol
 allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBalanced);
 
 % Plot pearls - unbalanced and balanced
-% subplot(1,2,1)
-% imshow(allThemPearls)
-% title("Unbalanced")
-% subplot(1,2,2)
-% imshow(allThemPearlsBalanced)
-% title("Balanced")
+subplot(1,2,1)
+imshow(allThemPearls)
+title("Unbalanced")
+subplot(1,2,2)
+imshow(allThemPearlsBalanced)
+title("Balanced")
 
 
 [quality] = qualityScieLab( im, allThemPearls, 1920, 20.8661417, 20 )
 [quality1] = qualityScieLab( im, allThemPearlsBalanced, 1920, 20.8661417, 20 )
 
+
+
 % Create image with rectangle
-% figure
-% [pearlifiedIm] = assemble(indexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
-% title("100pearls")
-% figure
-% [pearlifiedIm2] = assemble(newIndexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),RemovedNonExistingPearls,RowDist,ColDist);
-% title("removed non existing")
-% figure
-% [pearlifiedIm3] = assemble(indexPearlGridRemovedNonExisting,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedBySum,RowDist,ColDist);
-% title("by sum")
-% figure
-% [pearlifiedIm4] = assemble(indexPearlGridRemovedNonExistingAndReduced,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedByFrequency,RowDist,ColDist);
-% title("by frequency")
-% figure
-% [pearlifiedIm5] = assemble(indexPearlGridResized,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
-% title("resize")
+figure
+[pearlifiedIm] = assemble(indexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
+title("100pearls")
+figure
+[pearlifiedIm2] = assemble(newIndexPearlGrid,PearlsPerCol,PearlsPerRow,(ColDist/20),RemovedNonExistingPearls,RowDist,ColDist);
+title("removed non existing")
+figure
+[pearlifiedIm3] = assemble(indexPearlGridRemovedNonExisting,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedBySum,RowDist,ColDist);
+title("by sum")
+figure
+[pearlifiedIm4] = assemble(indexPearlGridRemovedNonExistingAndReduced,PearlsPerCol,PearlsPerRow,(ColDist/20),limitedByFrequency,RowDist,ColDist);
+title("by frequency")
+figure
+[pearlifiedIm5] = assemble(indexPearlGridResized,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
+title("resize")
 
 pearlCollection2 = createPearls(RemovedNonExistingPearls, ColDist, RowDist, im, "nope");
 pearlCollection3 = createPearls(limitedBySum, ColDist, RowDist, im, "nope");
