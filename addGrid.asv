@@ -15,7 +15,7 @@ if(option == 1)
     % and the ratio of the image.
     PearlsPerCol = ceil(PearlsPerRow*ratio);
 else
-    PearlsPerRow = option;
+    PearlsPerRow = floor(Width/PearlSize);
 
     % Calculates the number of pearls per column depedning on pearls per rows
     % and the ratio of the image.
