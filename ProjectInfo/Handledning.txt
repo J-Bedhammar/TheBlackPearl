@@ -17,3 +17,20 @@ skala ner orginal så en pixel per pärla
 
 ta hänsyn till hela området ( prälan + lite vitt ) 
  Kolla om någon inte är med alls 
+
+Frågor2: 
+
+1. [visa bilderna] 
+
+2. Fråga om färgkompenseringen, är den tillräcklig?
+
+3. Fråga om LAB färgvalen
+
+4. Fråga om kvalitetsmåttet, vad kan vi använda mer än S-cielab? inget mer mått
+
+5. Fråga om utbilden ska ha samma dimension som utbilden
+
+6. Är det ok att använda resize på bilden
+
+räkna hur mycket vitt/svart det är exakt i subbilderna för balansering
+lägg till en grå bakgrund eller medelvärdet av alla färger

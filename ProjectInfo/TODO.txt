@@ -5,6 +5,10 @@ TO DO:
 - S-CieLab kvalitetsmått
     - Använd olika reproduktionsupplösningar och betraktningsavstånd
     - Visuell bedömning och analysera måttet (jämför)
+- Gör bilden med pärlor o verklig storlek
+- Varje pärla ska gå efter en viss pixel
+- Kolla på medelvärdet av pärla + bakgrund i subbilderna
+- Ändra färg på pärlplattan
 
 
 OBS! Koden oberoende av inmatad bild, stor/liten.
