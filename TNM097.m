@@ -2,6 +2,11 @@ function [ image ] = TNM097(IM, numberOfColors, numberOfL)
 % TNM097
 % insert code that calls functions here
 
+% S-CIELab variables, screen info
+screenPixels = 1920;
+screenInches = 14.17; % 36cm
+distance = 19.68;  % 50cm
+
 % Add grid to image
 pearlSize = 10;
 pearlSize2 = 27;
@@ -57,11 +62,14 @@ indexPearlGridResized = indexColorMatch(pearlSingleArray,resizedIm);
 PearlGridRezised = indexColorMatch(pearlSingleArray2,resizedIm2);
 ditherGridRezised = indexColorMatch(map,resizedIm2);
 
+
 % Create image with the pearls in pearlsCollection. 
 allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection);
 allThemPearlsBWG = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBWG);
 allThemPearlsMean = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionMean);
-% allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBalanced);
+allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBalanced);
+
+
 
 % Create image with rectangle
 % figure
@@ -120,9 +128,9 @@ subplot(1,3,3)
 imshow(allThemPearlsMean)
 title("Mean")
  
-[quality] = qualityScieLab( im, allThemPearls, 1920, 20.8661417, 20 )
-[qualityBWG] = qualityScieLab( im, allThemPearlsBWG, 1920, 20.8661417, 20 )
-[qualityMean] = qualityScieLab( im, allThemPearlsMean, 1920, 20.8661417, 20 )
+[quality] = qualityScieLab( im, allThemPearls, screenPixels, screenInches, distance )
+[qualityBWG] = qualityScieLab( im, allThemPearlsBWG, screenPixels, screenInches, distance  )
+[qualityMean] = qualityScieLab( im, allThemPearlsMean, screenPixels, screenInches, distance  )
 
 
 
@@ -134,15 +142,15 @@ title("Original")
 subplot(2,2,2)
 imshow(allThemPearls2)
 title("Removed non-existing")
-[quality2] = qualityScieLab( im, allThemPearls2, 1920, 20.8661417, 20 )
+[quality2] = qualityScieLab( im, allThemPearls2, screenPixels, screenInches, distance )
 subplot(2,2,3)
 imshow(allThemPearls3)
 title("By sum")
-[quality3] = qualityScieLab( im, allThemPearls3, 1920, 20.8661417, 20 )
+[quality3] = qualityScieLab( im, allThemPearls3, screenPixels, screenInches, distance )
 subplot(2,2,4)
 imshow(allThemPearls4)
 title("By frequency")
-[quality4] = qualityScieLab( im, allThemPearls4, 1920, 20.8661417, 20 )
+[quality4] = qualityScieLab( im, allThemPearls4, screenPixels, screenInches, distance  )
 figure
 subplot(2,2,1)
 imshow(im)
@@ -150,27 +158,28 @@ title("Original")
 subplot(2,2,2)
 imshow(allThemPearls22)
 title("Removed non-existing")
-[quality22] = qualityScieLab( im, allThemPearls22, 1920, 20.8661417, 20 )
+[quality22] = qualityScieLab( im, allThemPearls22, screenPixels, screenInches, distance )
 subplot(2,2,3)
 imshow(allThemPearls32)
 title("By sum")
-[quality32] = qualityScieLab( im, allThemPearls32, 1920, 20.8661417, 20 )
+[quality32] = qualityScieLab( im, allThemPearls32, screenPixels, screenInches, distance  )
 subplot(2,2,4)
 imshow(allThemPearls42)
 title("By frequency")
-[quality42] = qualityScieLab( im, allThemPearls42, 1920, 20.8661417, 20 )
+[quality42] = qualityScieLab( im, allThemPearls42, screenPixels, screenInches, distance  )
+
 
  
 figure
 subplot(1,2,1)
 imshow(allThemPearls5)
 title("100 pearls")
-[quality5] = qualityScieLab( im, allThemPearls5, 1920, 20.8661417, 20 )
+[quality5] = qualityScieLab( im, allThemPearls5, screenPixels, screenInches, distance )
 
 subplot(1,2,2)
 imshow(allThemPearls6)
 title("100 pearls resized")
-[quality6] = qualityScieLab( im, allThemPearls6, 1920, 20.8661417, 20 )
+[quality6] = qualityScieLab( im, allThemPearls6, screenPixels, screenInches, distance )
 
 % figure
 % [X_no_dither,map] = rgb2ind(im,8,'nodither');
