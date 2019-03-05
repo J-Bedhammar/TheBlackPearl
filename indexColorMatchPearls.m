@@ -9,7 +9,6 @@ pearlSingleLab = zeros(size(pearlSingleArray));
 pearlCollection = cell2mat(inPearlCollection);
 [dimx,dimy,dimz] = size(pearlCollection);
 for i = 1:length(pearlSingleArray)
-    
     pearlSingleLab(1,i,:) = rgb2lab(mean(mean(pearlCollection(1:10,((i-1)*dimx+1):i*dimx,:))));
 end
 
