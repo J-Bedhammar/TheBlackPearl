@@ -35,7 +35,7 @@ RGBRange = colorSteps(1);
 % Set up pearls color in list
 [pearlPlate,pearlSingleArray] = pearlColors(pearlSize,RGBRange);
 [pearlPlate2,pearlSingleArray2] = pearlColors(pearlSize2,RGBRange);
-lessPerls = lessNumberOfPearls(pearlSingleArray,50);
+%lessPerls = lessNumberOfPearls(pearlSingleArray,50);
 
 %Dither. to extrect the 50 most viable colors
 [X_no_dither,dithermap] = rgb2ind(im,50,'nodither');
@@ -46,7 +46,7 @@ map(1,:,:) = dithermap;
 pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 0);
 pearlCollectionBWG = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 1);
 pearlCollectionMean = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 2);
-pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced", 0);
+%pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced", 0);
 
 % Mean colors of grid squares
 [meanGrid] = meanColorInGrid(im,ColDist,RowDist);
@@ -87,11 +87,12 @@ title("Mean")
 % imshow(allThemPearlsBalanced)
 % title("Balanced")
 
-
+% Quality measurement
 [quality] = qualityScieLab( im, allThemPearls, screenPixels, screenInches, distance )
 [qualityBWG] = qualityScieLab( im, allThemPearlsBWG, screenPixels, screenInches, distance )
 [qualityMean] = qualityScieLab( im, allThemPearlsMean, screenPixels, screenInches, distance )
 [quality1] = qualityScieLab( im, allThemPearlsBalanced, screenPixels, screenInches, distance )
+
 
 % Create image with rectangle
 % figure
@@ -110,11 +111,11 @@ title("Mean")
 % [pearlifiedIm5] = assemble(indexPearlGridResized,PearlsPerCol,PearlsPerRow,(ColDist/20),pearlSingleArray,RowDist,ColDist);
 % title("resize")
 
-pearlCollection2 = createPearls(RemovedNonExistingPearls, ColDist, RowDist, im, "nope");
-pearlCollection3 = createPearls(limitedBySum, ColDist, RowDist, im, "nope");
-pearlCollection4 = createPearls(limitedByFrequency, ColDist, RowDist, im, "nope");
-pearlCollection5 = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope");
-ditherCollection = createPearls(map, ColDist2, RowDist2, im, "nope");
+pearlCollection2 = createPearls(RemovedNonExistingPearls, ColDist, RowDist, im, "nope",0);
+pearlCollection3 = createPearls(limitedBySum, ColDist, RowDist, im, "nope",0);
+pearlCollection4 = createPearls(limitedByFrequency, ColDist, RowDist, im, "nope",0);
+pearlCollection5 = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope",0);
+ditherCollection = createPearls(map, ColDist2, RowDist2, im, "nope",0);
 
 allThemPearls2 = drawCircles(PearlsPerCol, PearlsPerRow, newIndexPearlGrid, pearlCollection2);
 allThemPearls3 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExisting, pearlCollection3);
