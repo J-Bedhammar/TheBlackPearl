@@ -1,7 +1,5 @@
 TO DO:
 
-- Byt ut Rectangle: Skapa alla "bilder" med våra egna pärlor
-- Lab, polära koordinater, normalfördelning
 - S-CieLab kvalitetsmått
     - Använd olika reproduktionsupplösningar och betraktningsavstånd
     - Visuell bedömning och analysera måttet (jämför)
@@ -45,7 +43,8 @@ KLART
 - Effektivisera pärlskapandet (skapa pärlorna i förväg)
 - Ta hänsyn till det vita/svarta området "bakom" pärlan. (KLART för "egna" pärlor)
 - Kolla om någon färg inte är med alls (färgomptimering)
-
+- Byt ut Rectangle: Skapa alla "bilder" med våra egna pärlor
+- Lab, polära koordinater, normalfördelning
 
 
 
