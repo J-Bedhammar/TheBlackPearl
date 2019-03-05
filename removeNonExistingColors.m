@@ -24,7 +24,14 @@ a = unique(newIndexPearlGrid);
 out = [a,histc(newIndexPearlGrid(:),a)];
 furtherRemoved = zeros(1,maxNumberOfColors);
 limitedNumberOfPearls = zeros(1,maxNumberOfColors,3);
-for i = 1: maxNumberOfColors
+[outSizeX,outSizeY] = size(out);
+if(outSizeX <maxNumberOfColors)
+    loopend = outSizeX;
+else
+    loopend = maxNumberOfColors;
+end
+
+for i = 1: loopend
 [value,maxIndex] = max(out(:,2));
 furtherRemoved(i) = maxIndex(1);
 limitedNumberOfPearls(1,i,:)=RemovedNonExistingPearls(1,maxIndex(1),:);
