@@ -38,7 +38,7 @@ pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "
 [meanGrid] = meanColorInGrid(im,ColDist,RowDist);
 
 % Find matching colors - image and pearls
-indexPearlGrid = indexColorMatchPearls(pearlSingleArray, meanGrid,pearlCollection);
+indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
 [RemovedNonExistingPearls,newIndexPearlGrid,limitedByFrequency] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
 limitedBySum = lessNumberOfPearls(RemovedNonExistingPearls,50);
 indexPearlGridRemovedNonExisting = indexColorMatch(limitedBySum, meanGrid);
