@@ -17,6 +17,8 @@ im = imresize(IM,[newX,newY]);
 [PearlsPerRow2, PearlsPerCol2] = addGrid(im, pearlSize, rowPearls);
 ColDist=pearlSize;
 RowDist=pearlSize;
+ColDist2=pearlSize2;
+RowDist2=pearlSize2;
 % temp is used if wanting to compare resized to pixel size
 resizedIm = imresize(im,[PearlsPerCol,PearlsPerRow]);
 resizedIm2 = imresize(im,[PearlsPerCol2,PearlsPerRow2]);
@@ -30,6 +32,10 @@ RGBRange = colorSteps(1);
 [pearlPlate2,pearlSingleArray2] = pearlColors(pearlSize2,RGBRange);
 lessPerls = lessNumberOfPearls(pearlSingleArray,50);
 
+%Dither. to extrect the 50 most viable colors
+[X_no_dither,dithermap] = rgb2ind(im,50,'nodither');
+
+map(1,:,:) = dithermap;
  % Create pearls out of the pearlSingleArray
 pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope");
 pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced");
@@ -45,6 +51,9 @@ indexPearlGridRemovedNonExisting = indexColorMatch(limitedBySum, meanGrid);
 indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedByFrequency, meanGrid);
 indexPearlGridResized = indexColorMatch(pearlSingleArray,resizedIm);
 PearlGridRezised = indexColorMatch(pearlSingleArray2,resizedIm2);
+ditherGridRezised = indexColorMatch(map,resizedIm2);
+
+
 
 
 % Create image with the pearls in pearlsCollection. 
@@ -84,6 +93,7 @@ pearlCollection2 = createPearls(RemovedNonExistingPearls, ColDist, RowDist, im, 
 pearlCollection3 = createPearls(limitedBySum, ColDist, RowDist, im, "nope");
 pearlCollection4 = createPearls(limitedByFrequency, ColDist, RowDist, im, "nope");
 pearlCollection5 = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope");
+ditherCollection = createPearls(map, ColDist2, RowDist2, im, "nope");
 
 allThemPearls2 = drawCircles(PearlsPerCol, PearlsPerRow, newIndexPearlGrid, pearlCollection2);
 allThemPearls3 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExisting, pearlCollection3);
@@ -91,6 +101,8 @@ allThemPearls4 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNo
 allThemPearls5 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridResized, pearlCollection5);
 allThemPearls6 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection5);
 allThemPearls7 = drawCircles(PearlsPerCol2, PearlsPerRow2, PearlGridRezised, pearlCollection5);
+ditherPearls = drawCircles(PearlsPerCol2, PearlsPerRow2, ditherGridRezised, ditherCollection);
+
 
 figure
 subplot(2,2,1)
