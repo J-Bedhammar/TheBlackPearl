@@ -25,38 +25,45 @@ RGBRange = colorSteps(1);
 lessPerls = lessNumberOfPearls(pearlSingleArray,50);
 
  % Create pearls out of the pearlSingleArray
-pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope");
-pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced");
+ % whichBackgrund, 0 = BW, 1 = BWG, 2 = mean value
+pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 0);
+pearlCollectionBWG = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 1);
+pearlCollectionMean = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 2);
+pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced", 0);
 
 % Mean colors of grid squares
 [meanGrid] = meanColorInGrid(im,ColDist,RowDist);
 
 % Find matching colors - image and pearls
 indexPearlGrid = indexColorMatch(pearlSingleArray, meanGrid);
-[RemovedNonExistingPearls,newIndexPearlGrid,limitedByFrequency] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
-limitedBySum = lessNumberOfPearls(RemovedNonExistingPearls,50);
-indexPearlGridRemovedNonExisting = indexColorMatch(limitedBySum, meanGrid);
-indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedByFrequency, meanGrid);
-indexPearlGridResized = indexColorMatch(pearlSingleArray,resizedIm );
+% [RemovedNonExistingPearls,newIndexPearlGrid,limitedByFrequency] = removeNonExistingColors(pearlSingleArray,indexPearlGrid,50);
+% limitedBySum = lessNumberOfPearls(RemovedNonExistingPearls,50);
+% indexPearlGridRemovedNonExisting = indexColorMatch(limitedBySum, meanGrid);
+% indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedByFrequency, meanGrid);
+% indexPearlGridResized = indexColorMatch(pearlSingleArray,resizedIm );
 
 
 % Create image with the pearls in pearlsCollection. 
 allThemPearls = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection);
-allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBalanced);
+allThemPearlsBWG = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBWG);
+allThemPearlsMean = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionMean);
+% allThemPearlsBalanced = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollectionBalanced);
 
-% Plot pearls - unbalanced and balanced
-subplot(1,2,1)
+%Plot pearls - unbalanced and balanced
+subplot(1,3,1)
 imshow(allThemPearls)
-title("Unbalanced")
-subplot(1,2,2)
-imshow(allThemPearlsBalanced)
-title("Balanced")
-
+title("BW")
+subplot(1,3,2)
+imshow(allThemPearlsBWG)
+title("BWG")
+subplot(1,3,3)
+imshow(allThemPearlsMean)
+title("Mean")
 
 [quality] = qualityScieLab( im, allThemPearls, 1920, 20.8661417, 20 )
+[qualityBWG] = qualityScieLab( im, allThemPearlsBWG, 1920, 20.8661417, 20 )
+[qualityMean] = qualityScieLab( im, allThemPearlsMean, 1920, 20.8661417, 20 )
 [quality1] = qualityScieLab( im, allThemPearlsBalanced, 1920, 20.8661417, 20 )
-
-
 
 % Create image with rectangle
 figure
