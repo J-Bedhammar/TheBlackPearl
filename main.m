@@ -8,7 +8,7 @@ close all;
 clc;
 
 % Load testimage
-path = fullfile('Images', 'qbåt.jpg'); % 3,5
+path = fullfile('Images', 'rainbow-kittens.jpg'); % 3,5
 
 testImage = imread(path);
 testImage = im2double(testImage);

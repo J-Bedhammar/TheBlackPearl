@@ -32,9 +32,12 @@ resizedIm2 = imresize(im,[PearlsPerCol2,PearlsPerRow2]);
 % Pearl colors:
 % 1 = 100, 2 = 80, 3 = 64, 4 = 48, 5 = 27, 6 = 18, 7 = 12, 8 = 8, 9 = 4
 RGBRange = colorSteps(1);
+RGBRange48 = colorSteps(4);
 % Set up pearls color in list
 [pearlPlate,pearlSingleArray] = pearlColors(pearlSize,RGBRange);
 [pearlPlate2,pearlSingleArray2] = pearlColors(pearlSize2,RGBRange);
+[pearlPlate48,pearlSingleArray48] = pearlColors(pearlSize,RGBRange48);
+
 %lessPerls = lessNumberOfPearls(pearlSingleArray,50);
 
 %Dither. to extrect the 50 most viable colors
@@ -47,6 +50,8 @@ pearlCollection = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 0
 pearlCollection2 = createPearls(pearlSingleArray2, ColDist, RowDist, im, "nope", 0);
 pearlCollectionBWG = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 1);
 pearlCollectionMean = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope", 2);
+pearlCollection48 = createPearls(pearlSingleArray48, ColDist, RowDist, im, "nope", 0);
+
 %pearlCollectionBalanced = createPearls(pearlSingleArray, ColDist, RowDist, im, "balanced", 0);
 
 % Mean colors of grid squares
@@ -61,6 +66,8 @@ indexPearlGridRemovedNonExistingAndReduced = indexColorMatch(limitedByFrequency,
 indexPearlGridResized = indexColorMatch(pearlSingleArray,resizedIm);
 PearlGridRezised = indexColorMatch(pearlSingleArray2,resizedIm2);
 ditherGridRezised = indexColorMatch(map,resizedIm2);
+indexPearlGrid48 = indexColorMatch(pearlSingleArray48, meanGrid);
+
 
 
 % Create image with the pearls in pearlsCollection. 
@@ -92,6 +99,8 @@ pearlCollection3 = createPearls(limitedBySum, ColDist, RowDist, im, "nope",0);
 pearlCollection4 = createPearls(limitedByFrequency, ColDist, RowDist, im, "nope",0);
 pearlCollection5 = createPearls(pearlSingleArray, ColDist, RowDist, im, "nope",0);
 ditherCollection = createPearls(map, ColDist2, RowDist2, im, "nope",0);
+pearlCollection48 = createPearls(pearlSingleArray48, ColDist, RowDist, im, "nope",0);
+
 
 allThemPearls2 = drawCircles(PearlsPerCol, PearlsPerRow, newIndexPearlGrid, pearlCollection2);
 allThemPearls3 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridRemovedNonExisting, pearlCollection3);
@@ -100,6 +109,7 @@ allThemPearls5 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGridResized, 
 allThemPearls6 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid, pearlCollection5);
 allThemPearls7 = drawCircles(PearlsPerCol2, PearlsPerRow2, PearlGridRezised, pearlCollection5);
 ditherPearls = drawCircles(PearlsPerCol2, PearlsPerRow2, ditherGridRezised, ditherCollection);
+allThemPearls48 = drawCircles(PearlsPerCol, PearlsPerRow, indexPearlGrid48, pearlCollection48);
 
 % Find matching colors - image and pearls
 indexPearlGridPearl = indexColorMatchPearls(pearlSingleArray, meanGrid,pearlCollection);
@@ -170,15 +180,27 @@ title("By frequency")
 
  
 figure
-subplot(1,2,1)
+subplot(2,2,1)
 imshow(allThemPearls5)
 title("100 pearls")
 [quality5] = qualityScieLab( im, allThemPearls5, screenPixels, screenInches, distance )
 
-subplot(1,2,2)
+subplot(2,2,2)
 imshow(allThemPearls6)
 title("100 pearls resized")
 [quality6] = qualityScieLab( im, allThemPearls6, screenPixels, screenInches, distance )
+
+
+subplot(2,2,3)
+imshow(allThemPearls48)
+title("48 pearls")
+[quality48] = qualityScieLab( im, allThemPearls48, screenPixels, screenInches, distance )
+
+
+subplot(2,2,4)
+imshow(allThemPearls48)
+title("resized")
+[qualityresized] = qualityScieLab( im, allThemPearls7, screenPixels, screenInches, distance )
 
 % figure
 % [X_no_dither,map] = rgb2ind(im,8,'nodither');
