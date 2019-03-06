@@ -151,15 +151,16 @@ title("Original")
 subplot(2,2,2)
 imshow(allThemPearls2)
 title("Removed non-existing")
-[quality2] = qualityScieLab( im, allThemPearls2, screenPixels, screenInches, distance )
+[qualityRemovedNonUsedPearls] = qualityScieLab( im, allThemPearls2, screenPixels, screenInches, distance )
 subplot(2,2,3)
 imshow(allThemPearls3)
 title("By sum")
-[quality3] = qualityScieLab( im, allThemPearls3, screenPixels, screenInches, distance )
+[qualityWhenFurtherRemovedBySum] = qualityScieLab( im, allThemPearls3, screenPixels, screenInches, distance )
 subplot(2,2,4)
 imshow(allThemPearls4)
-title("By frequency")
-[quality4] = qualityScieLab( im, allThemPearls4, screenPixels, screenInches, distance  )
+title("By Occurence")
+[qualityWhenFurtherRemovedByOccurence] = qualityScieLab( im, allThemPearls4, screenPixels, screenInches, distance  )
+
 figure
 subplot(2,2,1)
 imshow(im)
@@ -167,15 +168,15 @@ title("Original")
 subplot(2,2,2)
 imshow(allThemPearls22)
 title("Removed non-existing")
-[quality22] = qualityScieLab( im, allThemPearls22, screenPixels, screenInches, distance )
+[qualityRemovedNonUsedPearlsDependingOnBakground] = qualityScieLab( im, allThemPearls22, screenPixels, screenInches, distance )
 subplot(2,2,3)
 imshow(allThemPearls32)
 title("By sum")
-[quality32] = qualityScieLab( im, allThemPearls32, screenPixels, screenInches, distance  )
+[qualityWhenFurtherRemovedBySumDependingOnBakground] = qualityScieLab( im, allThemPearls32, screenPixels, screenInches, distance  )
 subplot(2,2,4)
 imshow(allThemPearls42)
 title("By frequency")
-[quality42] = qualityScieLab( im, allThemPearls42, screenPixels, screenInches, distance  )
+[qualityWhenFurtherRemovedByOccurenceDependingOnBakground] = qualityScieLab( im, allThemPearls42, screenPixels, screenInches, distance  )
 
 
  
@@ -183,24 +184,19 @@ figure
 subplot(2,2,1)
 imshow(allThemPearls5)
 title("100 pearls")
-[quality5] = qualityScieLab( im, allThemPearls5, screenPixels, screenInches, distance )
+[qualityOGIm100Pearls] = qualityScieLab( im, allThemPearls5, screenPixels, screenInches, distance )
 
 subplot(2,2,2)
 imshow(allThemPearls6)
 title("100 pearls resized")
-[quality6] = qualityScieLab( im, allThemPearls6, screenPixels, screenInches, distance )
+[qualityResizedOGIm100Pearls] = qualityScieLab( im, allThemPearls6, screenPixels, screenInches, distance )
 
 
 subplot(2,2,3)
 imshow(allThemPearls48)
 title("48 pearls")
-[quality48] = qualityScieLab( im, allThemPearls48, screenPixels, screenInches, distance )
+[quality48Pearls] = qualityScieLab( im, allThemPearls48, screenPixels, screenInches, distance )
 
-
-subplot(2,2,4)
-imshow(allThemPearls48)
-title("resized")
-[qualityresized] = qualityScieLab( im, allThemPearls7, screenPixels, screenInches, distance )
 
 % figure
 % [X_no_dither,map] = rgb2ind(im,8,'nodither');
